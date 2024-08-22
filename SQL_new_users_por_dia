@@ -1,0 +1,44 @@
+-- Definimos una CTE para obtener la fecha mínima (primer acción) para cada usuario
+WITH new_user AS (
+    SELECT MIN(time::DATE) AS date, user_id
+    FROM user_actions
+    GROUP BY user_id
+),
+
+-- Definimos una CTE para obtener la fecha mínima (primer acción) para cada repartidor
+new_courier AS (
+    SELECT MIN(time::DATE) AS date, courier_id
+    FROM courier_actions
+    GROUP BY courier_id
+),
+
+-- Contamos el número de nuevos usuarios por día
+daily_new_users AS (
+    SELECT date, COUNT(DISTINCT user_id) AS new_users
+    FROM new_user
+    GROUP BY date
+),
+
+-- Contamos el número de nuevos repartidores por día
+daily_new_couriers AS (
+    SELECT date, COUNT(DISTINCT courier_id) AS new_couriers
+    FROM new_courier
+    GROUP BY date
+)
+
+-- Seleccionamos la fecha, el número de nuevos usuarios, el número de nuevos repartidores,
+-- el total acumulado de usuarios y el total acumulado de repartidores
+SELECT 
+    u.date, 
+    u.new_users, 
+    c.new_couriers,
+    CAST(SUM(u.new_users) OVER (ORDER BY u.date) AS INTEGER) AS total_users,
+    CAST(SUM(c.new_couriers) OVER (ORDER BY c.date) AS INTEGER) AS total_couriers
+FROM 
+    daily_new_users u
+JOIN 
+    daily_new_couriers c
+ON 
+    u.date = c.date
+ORDER BY 
+    u.date;
