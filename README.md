@@ -12,5 +12,6 @@ En esta tarea, analizaremos el crecimiento de la audiencia de nuestro servicio y
   - Obtener la fecha mínima (primer acción) para cada repartidor.
   - Contar el número de nuevos usuarios por día.
   - Contar el número de nuevos repartidores por día.
+    
 Finalmente, seleccionamos la fecha, el número de nuevos usuarios, el número de nuevos repartidores, el total acumulado de usuarios y el   total acumulado de repartidores para analizar cómo crece nuestra base de usuarios y repartidores a lo largo del tiempo.
 
