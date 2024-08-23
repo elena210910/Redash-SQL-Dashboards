@@ -5,7 +5,7 @@ Basado en estas consultas, se han creado paneles de control para una mejor visua
 para los empleados de la empresa. Los paneles están creados en Redash y, por lo tanto, se construyen
 únicamente a través de consultas analíticas SQL.
 
-1. [**SQL new users por dia**] (https://github.com/elena210910/Redash-SQL-Dashboards/blob/main/SQL_new_users_por_dia)
+1. [SQL new users por dia](https://github.com/elena210910/Redash-SQL-Dashboards/blob/main/SQL_new_users_por_dia)
 En esta tarea, analizaremos el crecimiento de la audiencia de nuestro servicio y observaremos la dinámica del número de usuarios y repartidores. Utilizamos varias CTEs (Common Table Expressions) para:
   Obtener la fecha mínima (primer acción) para cada usuario.
   Obtener la fecha mínima (primer acción) para cada repartidor.
