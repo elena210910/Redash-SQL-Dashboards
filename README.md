@@ -7,11 +7,16 @@ para los empleados de la empresa. Los paneles están creados en Redash y, por lo
 
 1. [SQL new users por dia](https://github.com/elena210910/Redash-SQL-Dashboards/blob/main/SQL_new_users_por_dia)
 
-En esta tarea, analizaremos el crecimiento de la audiencia de nuestro servicio y observaremos la dinámica del número de usuarios y repartidores. Utilizamos varias CTEs (Common Table Expressions) para:
-  - Obtener la fecha mínima (primer acción) para cada usuario.
-  - Obtener la fecha mínima (primer acción) para cada repartidor.
+En esta tarea, analizaremos el crecimiento de la audiencia de nuestro servicio y observaremos la dinámica del número de usuarios. 
+Utilizamos varias CTEs (Common Table Expressions) para:
+  - Obtener la fecha mínima como primera acción para cada usuario.
   - Contar el número de nuevos usuarios por día.
-  - Contar el número de nuevos repartidores por día.
+  
     
-Finalmente, seleccionamos la fecha, el número de nuevos usuarios, el número de nuevos repartidores, el total acumulado de usuarios y el   total acumulado de repartidores para analizar cómo crece nuestra base de usuarios y repartidores a lo largo del tiempo.
+Finalmente, seleccionamos la fecha, el cambio en el número de nuevos usuarios y el crecimiento total de usuarios para analizar cómo crece nuestra base de usuarios a lo largo del tiempo. Calculamos los siguientes indicadores:
+
+**new_users_change:** El porcentaje de cambio en el número de nuevos usuarios en comparación con el día anterior.
+**total_users_growth:** El porcentaje de crecimiento total de usuarios en comparación con el día anterior.
+
+Estos indicadores nos permiten entender mejor la dinámica de crecimiento de nuestra base de usuarios y tomar decisiones informadas para mejorar nuestro servicio.
 
