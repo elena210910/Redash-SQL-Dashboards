@@ -5,13 +5,6 @@ WITH new_user AS (
     GROUP BY user_id
 ),
 
--- Definimos una CTE para obtener la fecha mínima (primer acción) para cada repartidor
-new_courier AS (
-    SELECT MIN(time::DATE) AS date, courier_id
-    FROM courier_actions
-    GROUP BY courier_id
-),
-
 -- Contamos el número de nuevos usuarios por día
 daily_new_users AS (
     SELECT date, COUNT(DISTINCT user_id) AS new_users
@@ -19,26 +12,22 @@ daily_new_users AS (
     GROUP BY date
 ),
 
--- Contamos el número de nuevos repartidores por día
-daily_new_couriers AS (
-    SELECT date, COUNT(DISTINCT courier_id) AS new_couriers
-    FROM new_courier
-    GROUP BY date
+-- Combinamos los datos y calculamos el total acumulado de usuarios
+combined_data AS (
+    SELECT 
+        date, 
+        new_users,
+        CAST(SUM(new_users) OVER (ORDER BY date) AS INTEGER) AS total_users
+    FROM 
+        daily_new_users
 )
 
--- Seleccionamos la fecha, el número de nuevos usuarios, el número de nuevos repartidores,
--- el total acumulado de usuarios y el total acumulado de repartidores
+-- Seleccionamos la fecha, el cambio en el número de nuevos usuarios y el crecimiento total de usuarios
 SELECT 
-    u.date, 
-    u.new_users, 
-    c.new_couriers,
-    CAST(SUM(u.new_users) OVER (ORDER BY u.date) AS INTEGER) AS total_users,
-    CAST(SUM(c.new_couriers) OVER (ORDER BY c.date) AS INTEGER) AS total_couriers
+    date,
+    ROUND((new_users - LAG(new_users) OVER (ORDER BY date))::NUMERIC / LAG(new_users) OVER (ORDER BY date) * 100, 2) AS new_users_change,
+    ROUND((total_users - LAG(total_users) OVER (ORDER BY date))::NUMERIC / LAG(total_users) OVER (ORDER BY date) * 100, 2) AS total_users_growth
 FROM 
-    daily_new_users u
-JOIN 
-    daily_new_couriers c
-ON 
-    u.date = c.date
+    combined_data
 ORDER BY 
-    u.date;
+    date;
