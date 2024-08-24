@@ -1,0 +1,77 @@
+-- Selecciona la fecha, el porcentaje de usuarios con un solo pedido y el porcentaje de usuarios con varios pedidos
+SELECT 
+    date,
+    ROUND(100 * single_order_users::decimal / paying_users, 2) AS single_order_users_share,
+    ROUND(100 * several_order_users::decimal / paying_users, 2) AS several_orders_users_share
+FROM (
+    -- Subconsulta para contar los usuarios que pagan por día
+    SELECT 
+        time::date AS date,
+        COUNT(DISTINCT user_id) AS paying_users
+    FROM 
+        user_actions
+    WHERE 
+        order_id NOT IN (
+            SELECT order_id
+            FROM user_actions
+            WHERE action = 'cancel_order'
+        )
+    GROUP BY 
+        date
+) t1
+LEFT JOIN (
+    -- Subconsulta para contar los usuarios con un solo pedido por día
+    SELECT 
+        date,
+        COUNT(user_id) AS single_order_users
+    FROM (
+        -- Subconsulta para contar los pedidos por usuario por día
+        SELECT 
+            time::date AS date,
+            user_id,
+            COUNT(DISTINCT order_id) AS user_orders
+        FROM 
+            user_actions
+        WHERE 
+            order_id NOT IN (
+                SELECT order_id
+                FROM user_actions
+                WHERE action = 'cancel_order'
+            )
+        GROUP BY 
+            date, user_id
+        HAVING 
+            COUNT(DISTINCT order_id) = 1
+    ) t2
+    GROUP BY 
+        date
+) t3 USING (date)
+LEFT JOIN (
+    -- Subconsulta para contar los usuarios con varios pedidos por día
+    SELECT 
+        date,
+        COUNT(user_id) AS several_order_users
+    FROM (
+        -- Subconsulta para contar los pedidos por usuario por día
+        SELECT 
+            time::date AS date,
+            user_id,
+            COUNT(DISTINCT order_id) AS user_orders
+        FROM 
+            user_actions
+        WHERE 
+            order_id NOT IN (
+                SELECT order_id
+                FROM user_actions
+                WHERE action = 'cancel_order'
+            )
+        GROUP BY 
+            date, user_id
+        HAVING 
+            COUNT(DISTINCT order_id) > 1
+    ) t4
+    GROUP BY 
+        date
+) t5 USING (date)
+ORDER BY 
+    date;
