@@ -1,0 +1,28 @@
+-- Subconsulta para calcular el número de usuarios que pagan por día
+WITH active_user AS (
+    SELECT 
+        DATE(time) AS date, 
+        COUNT(DISTINCT user_id) AS paying_users
+    FROM user_actions
+    WHERE order_id NOT IN (
+        SELECT order_id
+        FROM user_actions
+        WHERE action = 'cancel_order')
+    GROUP BY 1),
+
+-- Subconsulta para calcular el número total de usuarios por día
+total_users AS (
+    SELECT 
+        DATE(time) AS date,
+        COUNT(DISTINCT user_id) AS total_users
+    FROM user_actions 
+    GROUP BY date)
+
+-- Consulta principal para combinar los datos y calcular el porcentaje de usuarios que pagan
+SELECT 
+    au.date, 
+    au.paying_users, 
+    tu.total_users,
+    ROUND(((au.paying_users::NUMERIC / tu.total_users) * 100), 2) AS procent_paying_users
+FROM active_user au
+JOIN total_users tu ON au.date = tu.date;
