@@ -1,6 +1,6 @@
 # Redash-SQL-Dashboards
 
-Este repositorio contiene consultas SQL a la base de datos de una tienda de alimentacion online. 
+Este repositorio contiene consultas SQL a la base de datos de una tienda online,de alimentacion - recien abierta. 
 Basado en estas consultas, se han creado paneles de control para una mejor visualización de datos 
 para los empleados de la empresa. Los paneles están creados en Redash y, por lo tanto, se construyen
 únicamente a través de consultas analíticas SQL.
@@ -19,4 +19,16 @@ Finalmente, seleccionamos la fecha, el cambio en el número de nuevos usuarios y
 **total_users_growth:** El porcentaje de crecimiento total de usuarios en comparación con el día anterior.
 
 Estos indicadores nos permiten entender mejor la dinámica de crecimiento de nuestra base de usuarios y tomar decisiones informadas para mejorar nuestro servicio.
+
+2.[SQL active users](https://github.com/elena210910/Redash-SQL-Dashboards/blob/main/SQL_active_users)
+
+Este código SQL tiene como objetivo calcular el número de usuarios activos, es decir, aquellos que realizan compras en nuestra tienda, y determinar el porcentaje de usuarios activos en relación con el número total de usuarios por día.
+
+- Calcula el número de usuarios que realizan compras por día, excluyendo aquellos pedidos que han sido cancelados.
+- Calcula el número total de usuarios por día.
+- Combina los resultados de las subconsultas anteriores y calcula el porcentaje de usuarios activos en relación con el número total de usuarios por día.
+
+ Esta métrica es útil para entender el comportamiento de los usuarios y evaluar la efectividad de nuestras estrategias de retención y conversión.
+ Al conocer el porcentaje de usuarios que realizan compras, podemos identificar tendencias, mejorar nuestras campañas de marketing y optimizar
+ la experiencia del usuario para aumentar las ventas.
 
