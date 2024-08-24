@@ -32,7 +32,7 @@ Este código SQL tiene como objetivo calcular el número de usuarios activos, es
  Al conocer el porcentaje de usuarios que realizan compras, podemos identificar tendencias, mejorar nuestras campañas de marketing y optimizar
  la experiencia del usuario para aumentar las ventas.
 
- 3. [SQL single and several orders](https://github.com/elena210910/Redash-SQL-Dashboards/blob/main/SQL_new_users_por_dia)
+ 3. [SQL single and several orders](https://github.com/elena210910/Redash-SQL-Dashboards/blob/main/SQL_%20single_several)
     
 En esta tarea, hemos analizado los datos de acciones de usuarios para calcular el porcentaje de usuarios que realizan un solo pedido y el porcentaje de usuarios que realizan varios pedidos en un día determinado.
 
