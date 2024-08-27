@@ -20,7 +20,7 @@ Finalmente, seleccionamos la fecha, el cambio en el número de nuevos usuarios y
 
 **Estos indicadores** nos permiten entender mejor la dinámica de crecimiento de nuestra base de usuarios y tomar decisiones informadas para mejorar nuestro servicio.
 
-2.[SQL active users](https://github.com/elena210910/Redash-SQL-Dashboards/blob/main/SQL_active_users)
+2. [SQL active users](https://github.com/elena210910/Redash-SQL-Dashboards/blob/main/SQL_active_users)
 
 Este código SQL tiene como objetivo calcular el número de usuarios activos, es decir, aquellos que realizan compras en nuestra tienda, y determinar el porcentaje de usuarios activos en relación con el número total de usuarios por día.
 
