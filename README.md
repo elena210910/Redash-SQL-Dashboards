@@ -48,5 +48,5 @@ Dividimos a los usuarios en dos grupos: aquellos que realizaron un solo pedido y
 
 **El objetivo de este análisis** es entender mejor el comportamiento de los usuarios en términos de sus hábitos de compra. Esto puede ayudar a identificar patrones y tendencias, lo que es útil para la toma de decisiones estratégicas en marketing y gestión de clientes.
 
-[Aquí puedes ver el dashboard resultante del SQL sobre la actividad de nuestros usuarios](https://github.com/elena210910/Redash-SQL-Dashboards/blob/main/dashboard.PNG)
+![Aquí puedes ver el dashboard resultante del SQL sobre la actividad de nuestros usuarios](https://github.com/elena210910/Redash-SQL-Dashboards/blob/main/dashboard.PNG)
 
